@@ -131,7 +131,7 @@ rossmann-sales-prediction/
    - Save the best model as `model.pkl`.
 
 4. **Model Evaluation**:
-   - Evaluate models using RMSE, R2 score, and other relevant metrics.
+   - Evaluate models using RMSE and other relevant metrics.
 
 ---
 
@@ -145,14 +145,14 @@ rossmann-sales-prediction/
 
 ## Model Evaluation Metrics
 - **Root Mean Squared Error (RMSE)**: Measures prediction errors.
-- **R2 Score**: Indicates model goodness-of-fit.
+
 
 ---
 
 ## Flask Application
 - **Endpoints**:
   - `/`: Displays the home page.
-  - `/predictdata`: Accepts user inputs and provides predictions.
+  - `/predictsales`: Accepts user inputs and provides predictions.
 
 - **Backend**:
   - Integrates the pre-trained model (`model.pkl`) and preprocessor (`preprocessor.pkl`).
