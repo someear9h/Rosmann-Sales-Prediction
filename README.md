@@ -1,4 +1,4 @@
-```markdown
+
 # Rossmann Store Sales Prediction: Flask Application for Forecasting and Data Analysis
 
 ## Table of Contents
