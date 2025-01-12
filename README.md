@@ -1,149 +1,189 @@
-
-
 ```markdown
-# Rossmann Store Sales Prediction
+# Rossmann Store Sales Prediction: Flask Application for Forecasting and Data Analysis
 
-## Overview
-This project predicts daily sales for Rossmann stores using historical data and machine learning techniques. The goal is to forecast the "Sales" column for the test set provided in the [Rossmann Store Sales competition on Kaggle](https://www.kaggle.com/c/rossmann-store-sales).
-The dataset contains data for over 1,000 stores, influenced by factors like promotions, competition, holidays, seasonality, and locality.
-
----
-
-## Problem Statement
-Rossmann operates over 3,000 drug stores across seven European countries. Currently, individual store managers predict daily sales for up to six weeks in advance. However, these predictions often vary in accuracy. This project aims to:
-- Build a robust model to predict sales more accurately.
-- Automate the sales prediction process for consistency across stores.
-
-The dataset contains:
-- Historical sales data for 1,115 Rossmann stores.
-- Details on store closures, promotions, holidays, and other factors.
-
-**Challenge**: Predict the "Sales" column for the test set, considering the impact of all these factors.
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Folder Structure](#folder-structure)
+- [Setup Instructions](#setup-instructions)
+- [Model Training Workflow](#model-training-workflow)
+- [Data Preprocessing Techniques](#data-preprocessing-techniques)
+- [Model Evaluation Metrics](#model-evaluation-metrics)
+- [Flask Application](#flask-application)
+- [Frontend Development](#frontend-development)
+- [Deployment](#deployment)
+- [Conclusion](#conclusion)
 
 ---
 
-## Features of the Project
-### 1. **Data Preparation and Cleaning**
-- **Handling Missing Values**: 
-  - Missing numerical values (e.g., `CompetitionDistance`) are imputed based on domain logic.
-  - Missing categorical values are imputed with the most frequent category.
-- **Feature Engineering**: 
-  - New features are created to capture seasonality, holiday effects, and promotions.
-  - Categorical features are encoded using OneHotEncoding.
+## Project Overview
+This project aims to build a sales forecasting application for Rossmann Stores using historical data. The application provides an end-to-end solution for:
+- **Data ingestion**, feature engineering, and preprocessing.
+- **Exploratory Data Analysis (EDA)** to identify patterns and trends.
+- Training and deployment of a **Gradient Boosting model (XGBoost)** for accurate sales predictions.
+- Interactive user interface via a Flask web application.
 
-### 2. **Modeling**
-- **Machine Learning Algorithm**: 
-  - Utilizes `XGBoost` (eXtreme Gradient Boosting) for robust, scalable predictions.
-  - Parameters: `n_estimators=100`, `learning_rate=0.2`, `max_depth=10`, etc.
-- **Pipeline**: 
-  - Automates preprocessing (imputation, scaling, encoding) and model training.
-
-### 3. **Tools and Techniques**
-- **Gradient Boosting**: The XGBoost algorithm is used to handle large-scale, structured data.
-- **Version Control**: Ensures reproducibility and consistent development.
-- **Pickle Serialization**: The trained model is saved and reused for predictions.
+The problem stems from Rossmann store managers needing to predict daily sales for up to six weeks in advance. Sales are influenced by factors such as promotions, holidays, competition, and seasonal trends. The goal is to forecast sales while considering these influences.
 
 ---
 
-## Dataset
-The dataset is provided by Kaggle:
-- **Train Data**: Contains historical sales data with features like promotions, holidays, and store information.
-- **Test Data**: Features for which predictions need to be made.
-- **Target Column**: `Sales`
+## Technologies Used
 
-**Dataset Link**: [Rossmann Store Sales Dataset](https://www.kaggle.com/c/rossmann-store-sales/data)
+### Programming Languages & Tools
+- **Python**: Core programming language.
+- **Jupyter Notebook**: For EDA and model development.
+- **Flask**: Backend framework for model deployment.
+- **HTML/CSS**: Frontend development.
 
----
-
-## Workflow
-### Step 1: Data Ingestion
-- Load training and test datasets.
-- Split the data into training and validation sets.
-
-### Step 2: Data Preprocessing
-- Handle missing values (e.g., `CompetitionDistance`).
-- Encode categorical variables.
-- Scale numerical features for uniformity.
-
-### Step 3: Feature Engineering
-- Create new features such as:
-  - Year, month, day of the week.
-  - Holiday indicators.
-  - Days since competition began.
-  
-### Step 4: Model Training
-- Train the `XGBRegressor` model with hyperparameter tuning.
-- Save the trained model using `pickle`.
-
-### Step 5: Prediction and Evaluation
-- Generate predictions for the test set.
-- Evaluate model performance using metrics like RMSE.
+### Python Libraries
+- **Data Preprocessing**: Pandas, NumPy
+- **Data Visualization**: Matplotlib, Seaborn
+- **Machine Learning**: scikit-learn, XGBoost
+- **Model Evaluation**: RMSE, R2 score
+- **Other Utilities**: Logging, exception handling
 
 ---
 
-## Installation
-### Prerequisites
-- Python 3.8+
-- Jupyter Notebook or VS Code
+## Features
+- **End-to-End Machine Learning Pipeline**: From raw data to deployed model.
+- **Exploratory Data Analysis (EDA)**: Insightful statistics and visualizations.
+- **Feature Engineering**: Captures time-based trends, holiday effects, and more.
+- **Robust Preprocessing**: Handling missing data and creating derived features.
+- **XGBoost Model Training**: Optimized for high accuracy in sales forecasting.
+- **Flask Web App**: Enables users to input store data and get predictions.
+- **Frontend Development**: User-friendly interface with clean styling.
 
-### Required Libraries
-Install the dependencies using:
-```bash
-pip install -r requirements.txt
+---
+
+## Folder Structure
+```plaintext
+rossmann-sales-prediction/
+|-- app.py                  # Main Flask application
+|-- requirements.txt        # Project dependencies
+|-- artifacts/              # Contains processed datasets and model artifacts
+|   |-- preprocessor.pkl
+|   |-- model.pkl
+|   |-- train.csv
+|   |-- test.csv
+|-- src/                    # Source code for backend
+|   |-- components/
+|       |-- data_ingestion.py
+|       |-- data_transformation.py
+|       |-- model_trainer.py
+|   |-- pipeline/
+|       |-- predict_pipeline.py
+|       |-- train_pipeline.py
+|   |-- utils.py
+|   |-- logger.py
+|   |-- exception.py
+|-- templates/              # HTML templates for Flask app
+|   |-- index.html
+|-- static/                 # Static files (CSS, images, etc.)
+|   |-- style.css
+|-- notebooks/
+    |-- data/
+         |-- rossmann.csv       # Jupyter notebooks for EDA and model training
+    |-- EDA_ROSSMANN.ipynb
+    |-- MODEL_TRAINING.ipynb
 ```
 
 ---
 
-## Usage
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/rossmann-sales-prediction.git
-cd rossmann-sales-prediction
-```
+## Setup Instructions
+1. **Clone the Repository**:
+   ```bash
+   git clone <repository-url>
+   cd rossmann-sales-prediction
+   ```
 
-### 2. Run the Pipeline
-- **Train the Model**: 
-  Run the `data_ingestion.py` and `data_transformation.py` scripts to preprocess data and train the model.
-- **Save the Model**: 
-  Save the trained model as a `pickle` file for reuse.
+2. **Create a Virtual Environment**:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   ```
 
-### 3. Prediction
-Load the saved model to make predictions on new data:
-```python
-import pickle
+3. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-# Load the model
-with open('model.pkl', 'rb') as file:
-    model = pickle.load(file)
-
-# Make predictions
-predictions = model.predict(new_data)
-```
+4. **Run the Flask App**:
+   ```bash
+   python app.py
+   ```
+   Access the app at `http://127.0.0.1:8000/` in your browser.
 
 ---
 
+## Model Training Workflow
+### Steps:
+1. **Data Ingestion**:
+   - Load raw datasets.
+   - Split into training and testing datasets.
 
-```
+2. **Data Transformation**:
+   - Handle missing values.
+   - Perform feature scaling, encoding, and time-based transformations.
+   - Save the preprocessor as `preprocessor.pkl`.
+
+3. **Model Training**:
+   - Train using **XGBoost** for accurate predictions.
+   - Perform hyperparameter tuning and cross-validation.
+   - Save the best model as `model.pkl`.
+
+4. **Model Evaluation**:
+   - Evaluate models using RMSE, R2 score, and other relevant metrics.
 
 ---
 
-## Results
-- The model successfully predicts daily sales for Rossmann stores.
-- RMSE: **(Add evaluation metric)**
+## Data Preprocessing Techniques
+- **Feature Engineering**: Derived features such as promotions, holidays, and seasonal trends.
+- **Handling Missing Data**: Imputation techniques for null values.
+- **Time-Based Transformations**: Extracted year, month, and day from date fields.
+- **Encoding**: Transformed categorical variables into numerical formats.
 
 ---
 
-## Future Enhancements
-- Add hyperparameter tuning for XGBoost using grid search.
-- Incorporate more external data (e.g., weather conditions, economic indicators).
-- Experiment with other machine learning models for better performance.
+## Model Evaluation Metrics
+- **Root Mean Squared Error (RMSE)**: Measures prediction errors.
+- **R2 Score**: Indicates model goodness-of-fit.
 
 ---
+
+## Flask Application
+- **Endpoints**:
+  - `/`: Displays the home page.
+  - `/predictdata`: Accepts user inputs and provides predictions.
+
+- **Backend**:
+  - Integrates the pre-trained model (`model.pkl`) and preprocessor (`preprocessor.pkl`).
+  - Uses `predict_pipeline.py` for inference.
+
+---
+
+## Frontend Development
+- **HTML**:
+  - Clean layout for user input and result display.
+- **CSS**:
+  - Added styling to improve user experience.
+
+---
+
+## Deployment
+The project is deployed as a Flask application and can be further enhanced by deploying it on platforms such as AWS, Azure, or Heroku.
+
+---
+
+## Conclusion
+This project demonstrates a practical implementation of a sales forecasting pipeline, combining:
+- Real-world data analysis and machine learning model development.
+- Interactive deployment with Flask.
+- Feature engineering and time-series analysis.
 
 ## Contact
-For any queries or collaboration, feel free to reach out:
-- **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/your-profile)
-- **Twitter**: [@YourTwitterHandle](https://twitter.com/YourTwitterHandle)
-```
+Feel free to reach out if you have any questions or want to collaborate!
 
-You can edit the placeholders (`your-username`, `your-profile`, `@YourTwitterHandle`) with your actual information. Let me know if you’d like further customization!
+- LinkedIn: [My LinkedIn](https://www.linkedin.com/in/samarth-tikotkar-7532b0328/)
+- Twitter: [My Twitter](https://x.com/someear9h)
+```
