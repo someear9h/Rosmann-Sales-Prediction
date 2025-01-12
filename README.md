@@ -1,5 +1,5 @@
 
-# Rossmann Store Sales Prediction: Flask Application for Forecasting and Data Analysis
+# Rossmann Store Sales Prediction: Flask Application for Forecasting Sales
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -20,7 +20,6 @@
 ## Project Overview
 This project aims to build a sales forecasting application for Rossmann Stores using historical data. The application provides an end-to-end solution for:
 - **Data ingestion**, feature engineering, and preprocessing.
-- **Exploratory Data Analysis (EDA)** to identify patterns and trends.
 - Training and deployment of a **Gradient Boosting model (XGBoost)** for accurate sales predictions.
 - Interactive user interface via a Flask web application.
 
@@ -32,7 +31,7 @@ The problem stems from Rossmann store managers needing to predict daily sales fo
 
 ### Programming Languages & Tools
 - **Python**: Core programming language.
-- **Jupyter Notebook**: For EDA and model development.
+- **Jupyter Notebook**: For model development.
 - **Flask**: Backend framework for model deployment.
 - **HTML/CSS**: Frontend development.
 
@@ -40,14 +39,13 @@ The problem stems from Rossmann store managers needing to predict daily sales fo
 - **Data Preprocessing**: Pandas, NumPy
 - **Data Visualization**: Matplotlib, Seaborn
 - **Machine Learning**: scikit-learn, XGBoost
-- **Model Evaluation**: RMSE, R2 score
+- **Model Evaluation**: RMSE
 - **Other Utilities**: Logging, exception handling
 
 ---
 
 ## Features
 - **End-to-End Machine Learning Pipeline**: From raw data to deployed model.
-- **Exploratory Data Analysis (EDA)**: Insightful statistics and visualizations.
 - **Feature Engineering**: Captures time-based trends, holiday effects, and more.
 - **Robust Preprocessing**: Handling missing data and creating derived features.
 - **XGBoost Model Training**: Optimized for high accuracy in sales forecasting.
@@ -64,6 +62,7 @@ rossmann-sales-prediction/
 |-- artifacts/              # Contains processed datasets and model artifacts
 |   |-- preprocessor.pkl
 |   |-- model.pkl
+|   |-- data.csv
 |   |-- train.csv
 |   |-- test.csv
 |-- src/                    # Source code for backend
@@ -83,8 +82,7 @@ rossmann-sales-prediction/
 |   |-- style.css
 |-- notebooks/
     |-- data/
-         |-- rossmann.csv       # Jupyter notebooks for EDA and model training
-    |-- EDA_ROSSMANN.ipynb
+         |-- sales.csv       # Jupyter notebooks for model training
     |-- MODEL_TRAINING.ipynb
 ```
 
