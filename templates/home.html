@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosmann Sales Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Rosmann Sales Prediction</h1>
+        <form method="POST" action="/predictsales">
+            <div class="form-group">
+                <label for="Promo">Promo:</label>
+                <input type="number" id="Promo" name="Promo" value="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="DayOfWeek">Day Of Week:</label>
+                <input type="number" id="DayOfWeek" name="DayOfWeek" value="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="CompetitionDistance">Competition Distance:</label>
+                <input type="number" id="CompetitionDistance" name="CompetitionDistance" value="1200" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Store">Store:</label>
+                <input type="number" id="Store" name="Store" value="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Customers">Customers:</label>
+                <input type="number" id="Customers" name="Customers" value="500" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Open">Open:</label>
+                <input type="number" id="Open" name="Open" value="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="StateHoliday">State Holiday:</label>
+                <input type="text" id="StateHoliday" name="StateHoliday" value="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="SchoolHoliday">School Holiday:</label>
+                <input type="number" id="SchoolHoliday" name="SchoolHoliday" value="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="StoreType">Store Type:</label>
+                <input type="text" id="StoreType" name="StoreType" value="a" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Assortment">Assortment:</label>
+                <input type="text" id="Assortment" name="Assortment" value="a" required>
+            </div>
+
+            <div class="form-group">
+                <label for="CompetitionOpenSinceMonth">Competition Open Since Month:</label>
+                <input type="number" id="CompetitionOpenSinceMonth" name="CompetitionOpenSinceMonth" value="5" required>
+            </div>
+
+            <div class="form-group">
+                <label for="CompetitionOpenSinceYear">Competition Open Since Year:</label>
+                <input type="number" id="CompetitionOpenSinceYear" name="CompetitionOpenSinceYear" value="2010" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Promo2">Promo2:</label>
+                <input type="number" id="Promo2" name="Promo2" value="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Promo2SinceWeek">Promo2 Since Week:</label>
+                <input type="number" id="Promo2SinceWeek" name="Promo2SinceWeek" value="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Promo2SinceYear">Promo2 Since Year:</label>
+                <input type="number" id="Promo2SinceYear" name="Promo2SinceYear" value="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="PromoInterval">Promo Interval:</label>
+                <input type="text" id="PromoInterval" name="PromoInterval" value="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="WeekOfYear">Week Of Year:</label>
+                <input type="number" id="WeekOfYear" name="WeekOfYear" value="30" required>
+            </div>
+
+            <div class="form-group">
+                <label for="CompetitionOpen">Competition Open:</label>
+                <input type="number" id="CompetitionOpen" name="CompetitionOpen" value="5.0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Promo2Open">Promo2 Open:</label>
+                <input type="number" id="Promo2Open" name="Promo2Open" value="0.0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="IsPromo2Month">Is Promo2 Month:</label>
+                <input type="number" id="IsPromo2Month" name="IsPromo2Month" value="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Year">Year:</label>
+                <input type="number" id="Year" name="Year" value="2015" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Month">Month:</label>
+                <input type="number" id="Month" name="Month" value="7" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Day">Day:</label>
+                <input type="number" id="Day" name="Day" value="31" required>
+            </div>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if results is not none %}
+            <div class="result">
+                <h2>Prediction Result: {{ results }}</h2>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
